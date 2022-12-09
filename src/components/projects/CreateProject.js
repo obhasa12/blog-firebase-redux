@@ -1,8 +1,11 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { createProject } from '../../redux/ProjectSlice'
 
 const CreateProject = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] =useState('')
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         e.target.id === 'title'? setTitle(e.target.value): setContent(e.target.value)
@@ -10,7 +13,7 @@ const CreateProject = () => {
     const handleSumbit =(e) => {
         e.preventDefault()
         const output = {title, content}
-        console.log(output)
+        dispatch(createProject(output))
     }
 
     return ( 
