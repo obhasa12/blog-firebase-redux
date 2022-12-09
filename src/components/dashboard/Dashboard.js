@@ -1,10 +1,12 @@
 import Notification from "./Notification";
 import ProjectList from "../projects/ProjectList";
-import { connect } from "react-redux";
+import { useSelector } from 'react-redux'
 
-const Dashboard = (props) => {
-    // console.log(props)
-    const { projects } = props
+
+const Dashboard = () => {
+
+    const { projects } = useSelector(state => state.projects)
+    
     return ( 
         <div className="dashboard container">
             <div className="row">
@@ -19,10 +21,4 @@ const Dashboard = (props) => {
      );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        projects: state.project.projects
-    }
-}
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;
