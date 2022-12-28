@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { createProject } from '../../redux/ProjectSlice'
+import { createProject } from "../../redux/ProjectSlice"
 
 const CreateProject = () => {
     const [title, setTitle] = useState('')
@@ -14,6 +14,7 @@ const CreateProject = () => {
         e.preventDefault()
         const output = {title, content}
         dispatch(createProject(output))
+        e.target.reset();
     }
 
     return ( 

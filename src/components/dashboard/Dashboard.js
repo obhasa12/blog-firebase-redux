@@ -1,11 +1,20 @@
 import Notification from "./Notification";
 import ProjectList from "../projects/ProjectList";
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getDocs } from "firebase/firestore";
+import colRef from "../../firebase/fireBaseCof";
+import { getProjects } from "../../redux/ProjectSlice";
+import { useEffect } from "react";
 
 const Dashboard = () => {
 
     const { projects } = useSelector(state => state.projects)
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProjects());
+    }, []);
     
     return ( 
         <div className="dashboard container">
