@@ -1,15 +1,21 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { signIn } from "../../redux/authSlice"
 
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] =useState('')
+    const { auth } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         e.target.id === 'email'? setEmail(e.target.value): setPassword(e.target.value)
     }
     const handleSumbit =(e) => {
         e.preventDefault()
-        console.log({email, password})
+        const credetial = [email, password]
+        dispatch((signIn(credetial)))
+        e.target.reset()
     }
 
     return ( 

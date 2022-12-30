@@ -29,30 +29,30 @@ export const projectSlice = createSlice({
                 })
         }
     },
-    extraReducers: {
-        [getProjects.pending]: (state) => {
-            state.loading = true;
-        },
-        [getProjects.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.projects = action.payload;
-        },[getProjects.rejected]: (state) => {
-            state.loading = false;
-        }
-    }
-    // extraReducers: (getProjects) => {
-    //     getProjects
-    //         .pending((state) => {
-    //             state.loading = true
-    //         })
-    //         .fulfilled((state, action) => {
-    //             state.loading = false;
-    //             state.projects = action.payload;
-    //         })
-    //         .rejected((state) => {
-    //             state.loading = false;
-    //         })
+    // extraReducers: {
+    //     [getProjects.pending]: (state) => {
+    //         state.loading = true;
+    //     },
+    //     [getProjects.fulfilled]: (state, action) => {
+    //         state.loading = false;
+    //         state.projects = action.payload;
+    //     },[getProjects.rejected]: (state) => {
+    //         state.loading = false;
+    //     }
     // }
+    extraReducers: (builder) => {
+        builder
+            .addCase(getProjects.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(getProjects.fulfilled, (state, action) => {
+                state.loading = false;
+                state.projects = action.payload;
+            })
+            .addCase(getProjects.rejected, (state) => {
+                state.loading = false;
+            })
+    }
 })
 
 export const { createProject } = projectSlice.actions
