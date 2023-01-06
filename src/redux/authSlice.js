@@ -1,28 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { auth } from "../firebase/fireBaseCof";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { async } from "@firebase/util";
+import { signOut } from "firebase/auth";
 
 const initialState = {
-    authError: 'horras'
 }
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        signIn: (state, action) => {
-            signInWithEmailAndPassword(auth, ...action.payload)
+        signOutAction: (action) => {
+            signOut(auth)
                 .then(() => {
-                    console.log('login success')
-                    state.authError = null
+                    console.log("You have been Logged Out")
                 })
                 .catch((err) => {
-                    console.log(err.message)
+                    console.log(err)
                 })
         }
     }
 })
 
-export const { signIn } = authSlice.actions
+export const { signOutAction } = authSlice.actions
 export default authSlice.reducer 

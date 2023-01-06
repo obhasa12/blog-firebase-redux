@@ -1,18 +1,17 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import auth from "../../firebase/fireBaseCof"
-import { signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { signOutAction } from "../../redux/authSlice";
 
 const SignedInLinks = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleClick = () => {
-        signOut(auth)
-            .then(() => {
-                console.log("the user signed out")
-            })
-            .catch((err) => {
-                console.log(err.message)
-            })
+            dispatch(signOutAction())
+            navigate("/")
     }
+
     return ( 
         <ul className="right">
             <li><NavLink to="/create">New Project</NavLink></li>

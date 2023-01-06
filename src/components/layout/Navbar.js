@@ -3,18 +3,22 @@ import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import { auth } from "../../firebase/fireBaseCof";
 import { onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
 
 const Navbar = () => {
+    const [user, setUser] = useState("")
+
     onAuthStateChanged(auth, (user) => {
-        console.log("user states changed: ", user)
+        user? setUser(true): setUser(false)
     })
+
+    const userStat = user?  <SignedInLinks />: <SignedOutLinks />;
 
     return ( 
         <nav className="nav-wrapper grey darken-3">
             <div className="container">
             <Link to="/" className="brand-logo">AcenBlog</Link>
-            <SignedInLinks />
-            <SignedOutLinks />
+            { userStat }
             </div>
         </nav>
      );
